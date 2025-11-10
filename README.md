@@ -1,4 +1,8 @@
-# Hosts Manager - macOS Menu Bar Utility
+# HostSwitch - macOS Menu Bar Utility
+
+![macOS](https://img.shields.io/badge/macOS-11.0+-blue)
+![Swift](https://img.shields.io/badge/Swift-5.5+-orange)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-Framework-green)
 
 A macOS menu bar utility for managing entries in the `/etc/hosts` file with quick access from the top toolbar.
 
