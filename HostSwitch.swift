@@ -25,8 +25,8 @@ class HostSwitchManager: ObservableObject {
     @Published var statusMessage: String?
     
     private let hostsFilePath = "/etc/hosts"
-    private let sectionStart = "####### HostsManagerStart"
-    private let sectionEnd = "####### HostsManagerEnd"
+    private let sectionStart = "####### HostSwitchStart"
+    private let sectionEnd = "####### HostSwitchEnd"
     private var cachedHostsContent: String = ""
     
     init() {

@@ -24,9 +24,9 @@ A macOS menu bar utility for managing entries in the `/etc/hosts` file with quic
 
 The app manages a dedicated section in your `/etc/hosts` file marked with:
 ```
-####### HostsManagerStart
+####### HostSwitchStart
 # Your managed entries go here
-####### HostsManagerEnd
+####### HostSwitchEnd
 ```
 
 **Key benefits:**
@@ -66,11 +66,9 @@ If you don't have a managed section yet, the app will create one automatically w
 
 ```bash
 sudo echo '' >> /etc/hosts
-sudo echo '####### HostsManagerStart' >> /etc/hosts  
-sudo echo '####### HostsManagerEnd' >> /etc/hosts
+sudo echo '####### HostSwitchStart' >> /etc/hosts  
+sudo echo '####### HostSwitchEnd' >> /etc/hosts
 ```
-
-*Note: The section markers remain as "HostsManagerStart/End" for compatibility with existing installations.*
 
 ## Usage
 
