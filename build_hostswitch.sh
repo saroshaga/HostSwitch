@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Build script for Hosts Manager macOS Menu Bar app
-echo "Building Hosts Manager Menu Bar Utility..."
+# Build script for HostSwitch macOS Menu Bar app
+echo "Building HostSwitch Menu Bar Utility..."
 
 # Compile the Swift app
-swiftc -parse-as-library -o HostsManager.app/Contents/MacOS/HostsManager main.swift HostsManager.swift \
+swiftc -parse-as-library -o HostSwitch.app/Contents/MacOS/HostSwitch main.swift HostSwitch.swift \
     -framework SwiftUI \
     -framework Foundation \
     -framework AppKit \
@@ -12,10 +12,10 @@ swiftc -parse-as-library -o HostsManager.app/Contents/MacOS/HostsManager main.sw
 
 if [ $? -eq 0 ]; then
     echo "✅ Build successful!"
-    echo "📁 Menu bar app created at: HostsManager.app"
+    echo "📁 Menu bar app created at: HostSwitch.app"
     echo ""
     echo "To run the app:"
-    echo "  open HostsManager.app"
+    echo "  open HostSwitch.app"
     echo ""
     echo "📋 Usage:"
     echo "  • The app will appear in your menu bar with a network icon"

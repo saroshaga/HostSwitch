@@ -18,7 +18,7 @@ struct HostEntry: Identifiable {
     }
 }
 
-class HostsFileManager: ObservableObject {
+class HostSwitchManager: ObservableObject {
     @Published var hostEntries: [HostEntry] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
@@ -215,7 +215,7 @@ class HostsFileManager: ObservableObject {
         // If no managed section exists, create it at the end
         if !foundManagedSection {
             result.append("")
-            result.append("# Managed by Hosts Manager - Do not edit manually")
+            result.append("# Managed by HostSwitch - Do not edit manually")
             result.append(sectionStart)
             for entry in hostEntries {
                 result.append(entry.displayText)
@@ -249,7 +249,7 @@ class HostsFileManager: ObservableObject {
 
 class MenuBarController: NSObject, ObservableObject {
     private var statusItem: NSStatusItem!
-    private var hostsManager = HostsFileManager()
+    private var hostSwitchManager = HostSwitchManager()
     private var popover: NSPopover!
     
     override init() {
@@ -262,7 +262,7 @@ class MenuBarController: NSObject, ObservableObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "network", accessibilityDescription: "Hosts Manager")
+            button.image = NSImage(systemSymbolName: "network", accessibilityDescription: "HostSwitch")
             button.action = #selector(showMenu)
             button.target = self
         }
@@ -270,7 +270,7 @@ class MenuBarController: NSObject, ObservableObject {
     
     private func setupPopover() {
         popover = NSPopover()
-        popover.contentViewController = NSHostingController(rootView: MenuBarView(hostsManager: hostsManager))
+        popover.contentViewController = NSHostingController(rootView: MenuBarView(hostSwitchManager: hostSwitchManager))
         popover.behavior = .transient
     }
     
@@ -287,7 +287,7 @@ class MenuBarController: NSObject, ObservableObject {
 }
 
 struct MenuBarView: View {
-    @ObservedObject var hostsManager: HostsFileManager
+    @ObservedObject var hostSwitchManager: HostSwitchManager
     @State private var showingAddForm = false
     @State private var newIP = ""
     @State private var newHostname = ""
@@ -296,13 +296,13 @@ struct MenuBarView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("Hosts Manager")
+                Text("HostSwitch")
                     .font(.headline)
                     .fontWeight(.bold)
                 
                 Spacer()
                 
-                Button(action: { hostsManager.loadHostsFile() }) {
+                Button(action: { hostSwitchManager.loadHostsFile() }) {
                     Image(systemName: "arrow.clockwise")
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -310,7 +310,7 @@ struct MenuBarView: View {
             .padding(.horizontal)
             .padding(.top)
             
-            if hostsManager.hostEntries.isEmpty {
+            if hostSwitchManager.hostEntries.isEmpty {
                 VStack {
                     Text("No managed hosts found")
                         .font(.caption)
@@ -325,8 +325,8 @@ struct MenuBarView: View {
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 4) {
-                        ForEach(hostsManager.hostEntries) { entry in
-                            MenuBarHostRow(entry: entry, hostsManager: hostsManager)
+                        ForEach(hostSwitchManager.hostEntries) { entry in
+                            MenuBarHostRow(entry: entry, hostSwitchManager: hostSwitchManager)
                                 .padding(.horizontal)
                         }
                     }
@@ -361,7 +361,7 @@ struct MenuBarView: View {
                         Spacer()
                         
                         Button("Add") {
-                            hostsManager.addHostEntry(ip: newIP, hostname: newHostname, comment: newComment)
+                            hostSwitchManager.addHostEntry(ip: newIP, hostname: newHostname, comment: newComment)
                             showingAddForm = false
                             clearForm()
                         }
@@ -387,7 +387,7 @@ struct MenuBarView: View {
                 .padding()
             }
             
-            if let statusMessage = hostsManager.statusMessage {
+            if let statusMessage = hostSwitchManager.statusMessage {
                 Text(statusMessage)
                     .font(.caption)
                     .foregroundColor(.blue)
@@ -395,7 +395,7 @@ struct MenuBarView: View {
                     .padding(.bottom)
             }
             
-            if let errorMessage = hostsManager.errorMessage {
+            if let errorMessage = hostSwitchManager.errorMessage {
                 Text(errorMessage)
                     .font(.caption)
                     .foregroundColor(.red)
@@ -415,12 +415,12 @@ struct MenuBarView: View {
 
 struct MenuBarHostRow: View {
     let entry: HostEntry
-    let hostsManager: HostsFileManager
+    let hostSwitchManager: HostSwitchManager
     
     var body: some View {
         HStack(spacing: 8) {
             Button(action: {
-                hostsManager.toggleHostEntry(entry)
+                hostSwitchManager.toggleHostEntry(entry)
             }) {
                 Image(systemName: entry.isEnabled ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(entry.isEnabled ? .green : .red)

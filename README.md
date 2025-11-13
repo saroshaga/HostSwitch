@@ -6,6 +6,10 @@
 
 A macOS menu bar utility for managing entries in the `/etc/hosts` file with quick access from the top toolbar.
 
+![HostSwitch Interface](screenshots/hostswitch-interface.png)
+
+*Clean, intuitive interface showing host entries with toggle controls and status indicators.*
+
 ## Features
 
 - 🔝 **Menu bar integration** - Always accessible from the top toolbar
@@ -34,15 +38,27 @@ The app manages a dedicated section in your `/etc/hosts` file marked with:
 
 1. **Build the app:**
    ```bash
-   ./build_hosts_manager.sh
+   ./build_hostswitch.sh
    ```
 
 2. **Run the app:**
    ```bash
-   open HostsManager.app
+   open HostSwitch.app
    ```
 
 3. **Look for the network icon** in your menu bar and click it
+
+## Auto-Start on Login (Optional)
+
+To have HostSwitch start automatically when you log in:
+
+1. Open **System Settings** (or **System Preferences** on older macOS)
+2. Navigate to **General** → **Login Items & Extensions**
+3. Click **+** next to "Open at Login" 
+4. Browse to and select **HostSwitch.app**
+5. HostSwitch will now start automatically when you log in
+
+The app runs silently in the menu bar and will be ready whenever you need it.
 
 ## Initial Setup
 
@@ -53,6 +69,8 @@ sudo echo '' >> /etc/hosts
 sudo echo '####### HostsManagerStart' >> /etc/hosts  
 sudo echo '####### HostsManagerEnd' >> /etc/hosts
 ```
+
+*Note: The section markers remain as "HostsManagerStart/End" for compatibility with existing installations.*
 
 ## Usage
 

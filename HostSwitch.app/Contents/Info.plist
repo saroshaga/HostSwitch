@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>HostsManager</string>
+    <string>HostSwitch</string>
     <key>CFBundleIdentifier</key>
-    <string>com.utility.hostsmanager</string>
+    <string>com.utility.hostswitch</string>
     <key>CFBundleName</key>
-    <string>Hosts Manager</string>
+    <string>HostSwitch</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>CFBundleShortVersionString</key>
