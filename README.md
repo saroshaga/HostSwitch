@@ -6,7 +6,8 @@
 
 A macOS menu bar utility for managing entries in the `/etc/hosts` file with quick access from the top toolbar.
 
-![HostSwitch Interface](screenshots/hostswitch-interface.png)
+<img width="368" height="343" alt="Screenshot 2025-11-13 at 10 22 21 PM" src="https://github.com/user-attachments/assets/6da96fad-9d3a-496b-8753-88d6b91b67e7" />
+
 
 *Clean, intuitive interface showing host entries with toggle controls and status indicators.*
 
